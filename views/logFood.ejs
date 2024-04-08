@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Search</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  
+  <%if(locals.fn){%>
+    <%- include("partials/viewNavbar.ejs",{username:username,fname:fn}) %>
+    <div>
+      <h1><%=fn  %> today Diet data </h1>
+    </div>
+ <% }else{  %>
+  <%- include("partials/viewNavbar.ejs",{username:username,fname:ffff}) %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt-5">
+        <div class="input-group mb-3">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search for food...">
+          <button id="addBtn" class="btn btn-primary">Add</button>
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" id="servingInput" class="form-control" placeholder="Number of Serving(digits)" required>
+          <div class="invalid-feedback">Number of servings can't be negative</div>
+          <!-- <input type="number" id="repsInput" class="form-control" placeholder="Reps (type 0 if NA)"> -->
+        </div>
+        <ul id="foodList" class="list-group"></ul>
+      </div>
+    </div>
+  </div>
+  <% } %>
+  <% if (locals.foodTable&&locals.foodTable!=null) { %>
+    <table>
+      <thead>
+          <tr>
+              <th>User Name</th>
+              <th>Time</th>
+              <th>Food Name</th>
+              <th>Number of serving</th>
+              <th>Calories Consumed</th>
+          </tr>
+      </thead>
+      
+        <tbody>
+            <% locals.foodTable.forEach(food => { %>
+                <tr>
+                    <td> <%= food.username %> </td>
+                    <td> <%= food.time %> </td>
+                    <td> <%= food.food_name %> </td>
+                    <td> <%= food.num_of_serving %> </td>
+                    <td> <%= food.calories_consumed %> </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    
+    
+  </table>
+  <% } %>
+  <% if(locals.fn){ %>
+    <div>
+      <h3>Since you have achieved your daily goal you can't log any food items </h3>
+    </div>
+    <% } %>
+
+    <button type="button" onclick="window.location.href='/profileMain?username=<%=username  %>'" class="btn btn-primary">back</button>  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+   
+  <script>
+    $(document).ready(function(){
+      const foods = {
+        "Dosa": 150,
+        "Idli": 50,
+        "Sambar": 125,
+        "Vada": 125,
+        "Upma": 175,
+        "Pongal": 250,
+        "Appam": 125,
+        "Biryani": 400,
+        "Parotta": 300,
+        "Chettinad Chicken": 300,
+        "Fish Curry": 250,
+        "Rasam": 75,
+        "Paniyaram": 125,
+        "Kothu Parotta": 350,
+        "Poriyal": 75,
+        "Avial": 125,
+        "Lemon Rice": 250,
+        "Tomato Rice": 250,
+        "Curd Rice": 250,
+        "Chicken 65": 250,
+        "Mutton Curry": 300,
+        "Masala Dosa": 250,
+        "Thalappakatti Biriyani": 600,
+        "Payasam": 250,
+        "Pal Payasam": 250,
+        "Mysore Pak": 175,
+        "Medhu Vada": 125,
+        "Kuzhi Paniyaram": 125,
+        "Kozhukattai": 125,
+        "Adai": 175,
+        "Puttu": 175,
+        "Vegetable Biryani": 325,
+        "Kootu": 125,
+        "Chicken Chettinad": 300,
+        "Sevai": 250,
+        "Karuvattu Kuzhambu": 175,
+        "Mutton Chukka": 300,
+        "Murukku": 75,
+        "Seedai": 75,
+        "Thattai": 75,
+        "Mullu Murukku": 75,
+        "Rava Kesari": 175,
+        "Rava Upma": 175,
+        "Sweet Pongal": 250,
+        "Karasev": 125,
+        "Idiyappam": 175,
+        "Mutton Kola Urundai": 300,
+        "Kaara Kozhukattai": 125,
+        "Puli Sadam": 300
+    };
+
+    const searchInput=$('#searchInput');
+    const servingInput=$('#servingInput');
+    const foodList=$('#foodList');
+
+    function displayFoods(searchTerm){
+      foodList.empty();
+      const regex=new RegExp(searchTerm.replace(/\s/g, ''), 'gi');
+      const filteredFoods=Object.keys(foods).filter(food=>regex.test(food.replace(/\s/g, '')));
+      filteredFoods.forEach(food=>{
+        const listItem= $('<li>').addClass('list-group-item').text(food);
+          listItem.on('click',function(){
+            searchInput.val(food);
+            foodList.empty();//reomcve autosuggestion after click
+          });
+          foodList.append(listItem);
+      });
+    }
+
+      searchInput.on('input',function(){
+        const searchTerm=searchInput.val().trim();
+        if(searchTerm.length>0){
+          displayFoods(searchTerm);
+        }else{
+          foodList.empty();
+        }
+      });
+
+      $('#addBtn').on('click',function(event){
+        event.preventDefault(); // Prevent default form submission
+        // Check if number of serving is negative
+        if(parseInt(servingInput.val()) < 0){
+          servingInput.addClass('is-invalid');
+          return;
+        } else {
+          servingInput.removeClass('is-invalid');
+        }
+      
+        const form=$('<form>').attr('method','POST').attr('action','/logFood');
+        const inputName=$('<input>').attr('type','hidden').attr('name','foodName').val(searchInput.val());
+        const inputCalories=$('<input>').attr('type','hidden').attr('name','caloriesConsumed').val(foods[searchInput.val()]||0);
+        const inputServing = $('<input>').attr('type', 'hidden').attr('name', 'serving').val(servingInput.val());
+        const inputUsername = $('<input>').attr('type', 'hidden').attr('name', 'username').val('<%= username %>'); 
+
+      
+        form.append(inputName,inputCalories,inputServing,inputUsername);
+        $('body').append(form);
+        form.submit();
+      });
+      
+
+    
+    });
+  </script>
+  
+</body>
+</html>

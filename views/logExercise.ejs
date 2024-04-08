@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise Search</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  
+  <%if(locals.fn){%>
+    <%- include("partials/viewNavbar.ejs",{username:username,fname:fn}) %>
+    <div>
+      <h1><%=fn  %> today exercise data </h1>
+    </div>
+ <% }else{  %>
+  <%- include("partials/viewNavbar.ejs",{username:username,fname:ffff}) %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt-5">
+        <div class="input-group mb-3">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search for exercise...">
+          <button id="addBtn" class="btn btn-primary">Add</button>
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" id="durationInput" class="form-control" placeholder="Duration (minutes)" required>
+          <div class="invalid-feedback">Duration cannot be negative.</div>
+          <input type="number" id="repsInput" class="form-control" placeholder="Reps (type 0 if NA)">
+        </div>
+        <ul id="exerciseList" class="list-group"></ul>
+      </div>
+    </div>
+  </div>
+<% } %>
+  <% if (locals.exerciseTable&&locals.exerciseTable!=null) { %>
+  <table>
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Time</th>
+            <th>Exercise Name</th>
+            <th>Duration</th>
+            <th>Reps</th>
+            <th>Calories Burned</th>
+        </tr>
+    </thead>
+    
+      <tbody>
+          <% locals.exerciseTable.forEach(exercise => { %>
+              <tr>
+                  <td> <%= exercise.user_name %> </td>
+                  <td> <%= exercise.time %> </td>
+                  <td> <%= exercise.exercise_name %> </td>
+                  <td> <%= exercise.duration %> </td>
+                  <td> <%= exercise.reps %> </td>
+                  <td> <%= exercise.calories_burned %> </td>
+              </tr>
+          <% }); %>
+      </tbody>
+  
+  
+</table>
+<% } %>
+<% if(locals.fn){ %>
+  <div>
+    <h3>Since you have achieved your daily goal you can't log any exercise </h3>
+  </div>
+  <% } %>
+
+<button type="button" onclick="window.location.href='/profileMain?username=<%=username  %>'" class="btn btn-primary">back</button>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const exercises = {
+        "Running on Treadmill": 800,
+        "Bench Press": 250,
+        "Dumbbell Curls": 250,
+        "Plank": 250,
+        "Squats": 400,
+        "Deadlifts": 500,
+        "Leg Press": 500,
+        "Shoulder Press": 250,
+        "Lat Pulldowns": 350,
+        "Barbell Rows": 350,
+        "Tricep Dips": 250,
+        "Hammer Curls": 250,
+        "Lunges": 400,
+        "Calf Raises": 250,
+        "Russian Twists": 350,
+        "Pull-Ups": 500,
+        "Push-Ups": 250,
+        "Burpees": 500,
+        "Box Jumps": 600,
+        "Seated Cable Rows": 350,
+        "Jumping Jacks": 500,
+        "Cycling (Stationary Bike)": 500,
+        "Kettlebell Swings": 400,
+        "Battle Ropes": 600,
+        "Box Squats": 400,
+        "Mountain Climbers": 500,
+        "Jump Rope": 700,
+        "Medicine Ball Slams": 400,
+        "Burpees with Push-Up": 600,
+        "Trx Rows": 350,
+        "Plank with Shoulder Taps": 350,
+        "Sprints (High Intensity)": 850,
+        "Swimming": 600,
+        "Rowing Machine": 500,
+        "Elliptical Trainer": 500,
+        "High Knees": 600,
+        "Clean and Jerk": 600,
+        "Farmer's Walk": 400,
+        "Wall Sits": 250,
+        "Bench Dips": 250,
+        "Incline Push-Ups": 350,
+        "Jumping Lunges": 600,
+        "Bicycle Crunches": 350,
+        "Leg Raises": 250,
+        "Jumping Squats": 600,
+        "Tuck Jumps": 600,
+        "Plank with Knee to Elbow": 350,
+        "Walking Lunges": 400,
+        "Reverse Crunches": 250,
+        "Side Plank": 250
+      };
+      
+      
+      const searchInput = $('#searchInput');
+      const durationInput = $('#durationInput');
+      const repsInput = $('#repsInput');
+      const exerciseList = $('#exerciseList');
+    
+      function displayExercises(searchTerm) {
+        exerciseList.empty();
+        const regex = new RegExp(searchTerm.replace(/\s/g, ''), 'gi');
+        const filteredExercises = Object.keys(exercises).filter(exercise => regex.test(exercise.replace(/\s/g, '')));
+        filteredExercises.forEach(exercise => {
+          const listItem = $('<li>').addClass('list-group-item').text(exercise);
+          listItem.on('click', function() {
+            searchInput.val(exercise);
+            exerciseList.empty(); // Clear the auto-suggestion list
+          });
+          exerciseList.append(listItem);
+        });
+      }
+      
+      searchInput.on('input', function() {
+        const searchTerm = searchInput.val().trim();
+        if (searchTerm.length > 0) {
+          displayExercises(searchTerm);
+        } else {
+          exerciseList.empty();
+        }
+      });
+
+      $('#addBtn').on('click', function() {
+        // Check if duration is negative
+        if (durationInput.val() < 0) {
+          durationInput.addClass('is-invalid');
+          return;
+        } else {
+          durationInput.removeClass('is-invalid');
+        }
+
+        const form = $('<form>').attr('method', 'POST').attr('action', '/logExercise');
+        const inputName = $('<input>').attr('type', 'hidden').attr('name', 'exerciseName').val(searchInput.val());
+        const inputCalories = $('<input>').attr('type', 'hidden').attr('name', 'caloriesBurned').val(exercises[searchInput.val()] || 0);
+        const inputDuration = $('<input>').attr('type', 'hidden').attr('name', 'duration').val(durationInput.val());
+        const inputReps = $('<input>').attr('type', 'hidden').attr('name', 'reps').val(repsInput.val());
+        const inputUsername = $('<input>').attr('type', 'hidden').attr('name', 'username').val('<%= username %>'); 
+        form.append(inputName, inputCalories, inputDuration, inputReps, inputUsername);
+       $('body').append(form);
+        form.submit();
+      });
+    });
+  </script>
+</body>
+</html>
