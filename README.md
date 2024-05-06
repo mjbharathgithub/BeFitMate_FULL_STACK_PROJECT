@@ -1,4 +1,4 @@
-# BeFitMate (Ready with Ongoing Enhancements)
+# BeFitMate 
 ## OverView
 BeFitMate is a fully functional web application designed to assist users in achieving their fitness goals. While the app is ready for use, we are committed to continuously enhancing its features and performance to provide an even better user experience.
 
