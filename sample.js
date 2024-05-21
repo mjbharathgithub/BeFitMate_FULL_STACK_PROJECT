@@ -45,7 +45,6 @@
 
       console.log("database created successfully");
       let calConsumed,calBurned,tdee,status;
-      // let weight="100",idealW="63.58";
       console.log("w :"+weight+" type :"+typeof weight+" iw : "+idealW+"  type"+ typeof idealW+" addition"+(weight+idealW) +" multiplication :"+(weight*idealW));
       
       
