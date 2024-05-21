@@ -10,7 +10,7 @@
   app.use(bodyParser.urlencoded({ extended: true }));
 
   app.get("/waiting",(req,res)=>{
- //   res.render("logExercise.ejs",{username:"3smapleUser3"});
+ 
       res.render("logFood.ejs",{username:"newUserTest6"});
   })
   app.get("/",(req,res)=>{
