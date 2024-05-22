@@ -61,7 +61,7 @@
       }else{
         status="Loss";
         tdee=ff.calculateTDEE(bmr ,activityLevel);
-        calConsumed=tdee-250;//deficient
+        calConsumed=tdee-250;//used to find the calorie deficient
         calBurned=(ff.calculateCaloriesForWeightChange(tdee,weightLossPerWeek)-(tdee+250));
         console.log(" Weight loss maintainence :"+tdee+" calBurned :"+calBurned+" calConsumed :"+calConsumed+"or :"+(tdee-250));
   }
