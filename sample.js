@@ -126,10 +126,10 @@
     let caloriesBurnedPW;
     
     caloriesBurnedPW=ff.getCaloriesFromExercise(caloriesBurned,duration,reps);
-    // console.log("caloriesBurned :"+caloriesBurnedPW);
+   
     await database.registerUserCaloriesBurned(username,exerciseName,duration,reps,caloriesBurnedPW);
     let exerciseTable=await database.getCalorieBurnedTable(username);
-    //console.log("exercise table :",exerciseTable)
+    
     await database.updateCalAfterExercise(username,caloriesBurnedPW);
     let currCalBurn=await database.getUserProgressDetails(username);
     let {cal_burn_goal,cal_after_exercise}=currCalBurn[0];
