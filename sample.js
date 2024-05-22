@@ -68,7 +68,7 @@
   let date = new Date();
   let now = `${date.getFullYear()}:0${date.getMonth()+1}:${date.getDate()}`;
   await database.registerUserProgress(username,fname,status,calBurned,0,calConsumed,0,weight,0,now);
-  //need to check this
+  //need to check this at the starting of the signup
   
 
       res.render("profile.ejs",
