@@ -124,11 +124,7 @@
     
     try{
     let caloriesBurnedPW;
-    // console.log('user name:', username);
-    // console.log('Exercise:', exerciseName);
-    // console.log('Calories BurnedPerHour:', caloriesBurned);
-    // console.log('Duration:', duration, 'minutes');
-    // console.log('Reps:', reps);
+    
     caloriesBurnedPW=ff.getCaloriesFromExercise(caloriesBurned,duration,reps);
     // console.log("caloriesBurned :"+caloriesBurnedPW);
     await database.registerUserCaloriesBurned(username,exerciseName,duration,reps,caloriesBurnedPW);
