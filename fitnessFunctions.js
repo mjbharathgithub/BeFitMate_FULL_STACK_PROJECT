@@ -58,11 +58,7 @@
       // }
       
        
-        //   "Plank with Knee to Elbow": 350,
-        //   "Walking Lunges": 400,
-        //   "Reverse Crunches": 250,
-        //   "Side Plank": 250
-        // };
+       
         let caloriesBurned;
         
         if (duration < 0) {
