@@ -57,18 +57,7 @@
       //   return ((tdee-gmr) + caloriesForWeightLoss);
       // }
       function getCaloriesFromExercise(calBurnedPerHour, duration, reps) {
-        // const exercises = {
-        //   "Running on Treadmill": 800,
-        //   "Bench Press": 250,
-        //   "Dumbbell Curls": 250,
-        //   "Plank": 250,
-        //   "Squats": 400,
-        //   "Deadlifts": 500,
-        //   "Leg Press": 500,
-        //   "Shoulder Press": 250,
-        //   "Lat Pulldowns": 350,
-        //   "Barbell Rows": 350,
-        //   "Tricep Dips": 250,
+       
         //   "Hammer Curls": 250,
         //   "Lunges": 400,
         //   "Calf Raises": 250,
