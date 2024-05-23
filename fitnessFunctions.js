@@ -56,20 +56,7 @@
         
       //   return ((tdee-gmr) + caloriesForWeightLoss);
       // }
-      function getCaloriesFromExercise(calBurnedPerHour, duration, reps) {
-       
-        //   "Hammer Curls": 250,
-        //   "Lunges": 400,
-        //   "Calf Raises": 250,
-        //   "Russian Twists": 350,
-        //   "Pull-Ups": 500,
-        //   "Push-Ups": 250,
-        //   "Burpees": 500,
-        //   "Box Jumps": 600,
-        //   "Seated Cable Rows": 350,
-        //   "Jumping Jacks": 500,
-        //   "Cycling (Stationary Bike)": 500,
-        //   "Kettlebell Swings": 400,
+      
         //   "Battle Ropes": 600,
         //   "Box Squats": 400,
         //   "Mountain Climbers": 500,
