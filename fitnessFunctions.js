@@ -75,61 +75,6 @@
         }
     }
 
-    // function getCaloriesFromFood(food, numberOfServing) {
-      
-    //   const foods = {
-    //     "Dosa": 150,
-    //     "Idli": 50,
-    //     "Sambar": 125,
-    //     "Vada": 125,
-    //     "Upma": 175,
-    //     "Pongal": 250,
-    //     "Appam": 125,
-    //     "Biryani": 400,
-    //     "Parotta": 300,
-    //     "Chettinad Chicken": 300,
-    //     "Fish Curry": 250,
-    //     "Rasam": 75,
-    //     "Paniyaram": 125,
-    //     "Kothu Parotta": 350,
-    //     "Poriyal": 75,
-    //     "Avial": 125,
-    //     "Lemon Rice": 250,
-    //     "Tomato Rice": 250,
-    //     "Curd Rice": 250,
-    //     "Chicken 65": 250,
-    //     "Mutton Curry": 300,
-    //     "Masala Dosa": 250,
-    //     "Thalappakatti Biriyani": 600,
-    //     "Payasam": 250,
-    //     "Pal Payasam": 250,
-    //     "Mysore Pak": 175,
-    //     "Medhu Vada": 125,
-    //     "Kuzhi Paniyaram": 125,
-    //     "Kozhukattai": 125,
-    //     "Adai": 175,
-    //     "Puttu": 175,
-    //     "Vegetable Biryani": 325,
-    //     "Kootu": 125,
-    //     "Chicken Chettinad": 300,
-    //     "Sevai": 250,
-    //     "Karuvattu Kuzhambu": 175,
-    //     "Mutton Chukka": 300,
-    //     "Murukku": 75,
-    //     "Seedai": 75,
-    //     "Thattai": 75,
-    //     "Mullu Murukku": 75,
-    //     "Rava Kesari": 175,
-    //     "Rava Upma": 175,
-    //     "Sweet Pongal": 250,
-    //     "Karasev": 125,
-    //     "Idiyappam": 175,
-    //     "Mutton Kola Urundai": 300,
-    //     "Kaara Kozhukattai": 125,
-    //     "Puli Sadam": 300
-    // };
-    // return foods[food]*numberOfServing;
-    // }
 
     function finalWeight(intialWeight,calBurned,calConsumed,status,tdee){
       if(status=='Loss'){
