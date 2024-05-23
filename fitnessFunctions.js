@@ -99,7 +99,7 @@
   //   let calWgain=Math.round(calculateCaloriesForWeightGain(tdee,1));
   //   let calWloss=Math.round(calculateCaloriesForWeightLoss(tdee,1));
   //   let calFromExercise=getCaloriesFromExercise("Plank",360,"NA");
-  //   let calFromFood=getCaloriesFromFood("Dosa",5);
+  //   let calFromFood=getCaloriesFromFood("Dosa",5);sf
   //   let wcpe=weightLossPerExercise(84,0,770);
 
   // console.log(`
