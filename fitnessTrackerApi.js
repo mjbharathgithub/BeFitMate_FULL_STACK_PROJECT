@@ -11,7 +11,7 @@ app.get("/all", (req, res) => {
 });
 app.get("/exercises/:exercise", (req, res) => {
   const name = req.params.exercise;
-  console.log("Requested exercise name:", name); // Add this line for 
+  console.log("Requested exercise name:", name); 
   const exe = exercises.find((e) => e.exercise == name);
   console.log(exe);
   console.log("Exercise Name: "+exe.exercise+"Exercise cal"+ exe.caloriesBurned);
