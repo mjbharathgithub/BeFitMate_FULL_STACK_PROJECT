@@ -2,6 +2,8 @@
 ## OverView
 BeFitMate is a fully functional web application designed to assist users in achieving their fitness goals. While the app is ready for use, we are committed to continuously enhancing its features and performance to provide an even better user experience.
 
+![image](https://github.com/user-attachments/assets/51838a84-7380-4737-a525-fa59b08cc979)
+
 ## Tech Stack
 - Front End: HTML, CSS, Bootstrap, jQuery
 - Back End: Express, EJS, Chart.js
